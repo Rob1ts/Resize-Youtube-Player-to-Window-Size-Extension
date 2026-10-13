@@ -8,6 +8,8 @@ Toggle it with the **W** key while the player has focus, or from the toolbar but
 
 This extension was coded using Opencode and Space Bunny Free model.
 
+WARNING: Extensions are not signed.
+
 ## Credits and provenance
 
 This project is a **derivative work** of
