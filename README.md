@@ -76,5 +76,3 @@ notice must be retained either way.
 
 - Upstream project: <https://github.com/Zren/ResizeYoutubePlayerToWindowSize/>
 - Upstream userscript: <https://greasyfork.org/scripts/811-resize-yt-to-window-size>
-- Chrome Web Store listing: _pending_
-- AMO listing: _pending_
