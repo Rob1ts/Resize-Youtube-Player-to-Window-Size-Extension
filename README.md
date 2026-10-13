@@ -6,6 +6,8 @@ beneath the video instead of sitting beside it.
 
 Toggle it with the **W** key while the player has focus, or from the toolbar button.
 
+This extension was coded using Opencode and Space Bunny Free model.
+
 ## Credits and provenance
 
 This project is a **derivative work** of
