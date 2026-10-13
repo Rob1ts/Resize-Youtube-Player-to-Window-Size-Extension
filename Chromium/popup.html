@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Resize YT To Window Size</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header class="head">
+    <img class="logo" src="icons/icon48.png" alt="" width="30" height="30">
+    <div class="titles">
+      <h1>Resize YT To Window Size</h1>
+      <p class="sub" id="context">Checking current tab&hellip;</p>
+    </div>
+  </header>
+
+  <button type="button" id="toggle" class="toggle" role="switch" aria-checked="false" disabled>
+    <span class="track"><span class="thumb"></span></span>
+    <span class="label" id="toggleLabel">Window player</span>
+  </button>
+
+  <footer class="foot">
+    Press <kbd>W</kbd> while the video has focus to toggle it too.
+  </footer>
+
+  <script src="popup.js"></script>
+</body>
+</html>

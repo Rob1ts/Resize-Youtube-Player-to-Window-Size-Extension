@@ -1,0 +1,54 @@
+{
+  "manifest_version": 2,
+  "name": "Resize YT To Window Size",
+  "version": "139",
+  "description": "Moves the YouTube video to the top of the website and fill the window with the video player.",
+  "author": "Chris H (Zren / Shade)",
+  "homepage_url": "https://github.com/Zren/ResizeYoutubePlayerToWindowSize/",
+
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "96": "icons/icon96.png",
+    "128": "icons/icon128.png"
+  },
+
+  "browser_action": {
+    "default_title": "Resize YT To Window Size",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png"
+    }
+  },
+
+  "permissions": [
+    "https://*.youtube.com/*",
+    "http://*.youtube.com/*",
+    "https://*.youtu.be/*",
+    "http://*.youtu.be/*"
+  ],
+
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.youtube.com/*",
+        "*://youtube.com/*",
+        "*://*.youtu.be/*",
+        "*://youtu.be/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "resize-yt-to-window-size@local",
+      "strict_min_version": "78.0"
+    }
+  }
+}
