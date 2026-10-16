@@ -89,48 +89,6 @@ Manifest V2 while Firefox still does. `Firefox/content.js` and
 `Chromium/content.js` differ solely in their header comment; the executable code
 below it is byte-identical.
 
-## Building the packages
-
-### Firefox `.xpi`
-
-`manifest.json` must sit at the archive root and entry names must use forward
-slashes. PowerShell 5.1's `Compress-Archive` produces backslashes, which Firefox
-rejects:
-
-```powershell
-Add-Type -AssemblyName System.IO.Compression.FileSystem
-$src = 'Firefox'
-$xpi = 'resize_yt_to_window_size.xpi'
-Remove-Item -Force $xpi -ErrorAction SilentlyContinue
-$zip = [System.IO.Compression.ZipFile]::Open($xpi, 'Create')
-Get-ChildItem -LiteralPath $src -Recurse -File | ForEach-Object {
-    $rel = $_.FullName.Substring((Resolve-Path $src).Path.Length + 1).Replace('\', '/')
-    [System.IO.Compression.ZipFileExtensions]::CreateEntryFromFile(
-        $zip, $_.FullName, $rel, 'Optimal') | Out-Null
-}
-$zip.Dispose()
-```
-
-### Chromium `.zip` and `.crx`
-
-Upload **`resize_yt_to_window_size.zip`** to the Chrome Web Store, not the
-`.crx` — Google signs submissions itself. The ZIP must contain the *contents* of
-`Chromium/`, so `manifest.json` lands at the archive root; zipping the folder
-itself fails with `PKG_INVALID_ZIP`.
-
-```powershell
-node build-crx.js     # zips Chromium/, signs, writes both the .zip and the .crx
-node verify-crx.js    # validates the container, both signatures, and the payload
-```
-
-The signing key lives in `crx-signing-key.pem`, is generated on first run and
-reused afterwards, so the extension ID stays stable
-(`annhdppogbddnceadolfkbncomopjomj`).
-
-> **Keep `crx-signing-key.pem` out of version control.** Anyone holding it can
-> ship updates that impersonate this extension. It is ignored by `.gitignore`;
-> contributors who want to build their own `.crx` should generate their own key.
-
 ## Security
 
 - Host access is `https://` only. YouTube serves HTTPS exclusively, so plaintext
