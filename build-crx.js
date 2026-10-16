@@ -119,7 +119,7 @@ const info = [
   '',
   'Extension ID: ' + extId,
   'Public key SHA-256 (crx_id): ' + crxId.toString('hex'),
-  'Private key: ' + KEY_PEM,
+  'Private key: crx-signing-key.pem (git-ignored, never commit)',
   '',
   'To rebuild after changing Chromium/:',
   '  node build-crx.js',

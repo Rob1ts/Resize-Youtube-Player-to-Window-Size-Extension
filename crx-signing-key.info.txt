@@ -9,7 +9,7 @@ Anyone holding it can ship updates that impersonate this extension.
 
 Extension ID: annhdppogbddnceadolfkbncomopjomj
 Public key SHA-256 (crx_id): 0dd73ffe6133d2403eb5a1d2ecef9ec9
-Private key: D:\Descargas\Extensions\Project reside Youtube player to window\crx-signing-key.pem
+Private key: crx-signing-key.pem (git-ignored, never commit)
 
 To rebuild after changing Chromium/:
   node build-crx.js
