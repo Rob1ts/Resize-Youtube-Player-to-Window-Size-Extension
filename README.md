@@ -148,24 +148,6 @@ reused afterwards, so the extension ID stays stable
 The add-on collects and transmits nothing, which is why it declares
 `data_collection_permissions: { "required": ["none"] }`.
 
-## Known issue: brief black flash on load
-
-When a watch page first loads, the player jumps from its natural size to fill the
-window, and a black frame is visible for well under a second before the video
-appears.
-
-This is not a CSS transition — the player has no transitions applied. Clicking
-theater mode (which the extension triggers) **re-parents** the `<video>` element,
-swapping six ancestors and forcing the browser to rebuild the hardware video
-layer, after which the extension's stylesheet immediately resizes it to `100vh`.
-The player background is black, so it shows through while the new layer
-rasterizes.
-
-Firefox makes this visible; Chrome usually scales the existing layer in place and
-the gap is not apparent. Left as-is because the alternative — skipping the
-theater mode click — risks breaking the layout, and a sub-second cosmetic flash
-is a better trade than a layout bug.
-
 ## Credits and provenance
 
 This project is a **derivative work** of
