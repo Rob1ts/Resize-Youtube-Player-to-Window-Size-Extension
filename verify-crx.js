@@ -10,7 +10,9 @@ const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
 
-const ROOT = 'D:\\Descargas\\Extensions\\Project reside Youtube player to window';
+// Repo root is wherever this script lives, so no absolute local path is baked
+// into the committed source.
+const ROOT = __dirname;
 const CRX = path.join(ROOT, 'resize_yt_to_window_size.crx');
 const SRC = path.join(ROOT, 'Chromium');
 

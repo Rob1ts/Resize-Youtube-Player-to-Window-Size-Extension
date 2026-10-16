@@ -7,6 +7,17 @@ crx-signing-key.pem
 *.key
 *.p12
 
+# Built packages -- regenerate with build-crx.js (Chromium) or the documented
+# Firefox zip command. Not committed so they can never silently drift from the
+# source they were built from.
+/resize_yt_to_window_size.crx
+/resize_yt_to_window_size.zip
+/resize_yt_to_window_size.xpi
+
+# Transient scratch files written by the build/verify scripts
+.crx-payload.zip
+.verify-payload/
+
 # Stale backup of a previous package
 *.bak
 

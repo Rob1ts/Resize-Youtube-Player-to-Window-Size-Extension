@@ -9,7 +9,7 @@
 [![Firefox](https://img.shields.io/badge/Firefox-140%2B-E6602C?logo=firefox-browser&logoColor=white)](https://addons.mozilla.org)
 [![Chrome](https://img.shields.io/badge/Chrome%2FEdge%2CBrave-MV3-4285F4?logo=googlechrome&logoColor=white)](https://developer.chrome.com/docs/webstore)
 [![License](https://img.shields.io/badge/license-GPL--3.0%2BOr%20later-blue.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-139-informational)](https://github.com/Rob1ts/Resize-Youtube-Player-to-Window-Size-Extension/releases)
+[![Version](https://img.shields.io/badge/version-140-informational)](https://github.com/Rob1ts/Resize-Youtube-Player-to-Window-Size-Extension/releases)
 
 [Install](#installation) · [How it works](#what-it-does) · [Build it](#building-the-packages)
 
@@ -102,6 +102,9 @@ below it is byte-identical.
   script's only page mutation is a stylesheet of static CSS rules.
 - Debug logging is opt-in (`ytwp.debug = false`); DOM nodes and keyboard events
   are never written to the page console.
+- The CRX signing key is kept **outside the repository** (per-user
+  `~/.crx-keys/`, overridable with `CRX_KEY_PATH`), so it cannot be committed,
+  zipped up with a checkout, or picked up by a cloud-sync client.
 
 The add-on collects and transmits nothing, which is why it declares
 `data_collection_permissions: { "required": ["none"] }`.

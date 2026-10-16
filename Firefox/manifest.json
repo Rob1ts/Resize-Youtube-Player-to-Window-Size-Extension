@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Resize YT To Window Size",
-  "version": "139",
+  "version": "140",
   "description": "Moves the YouTube video to the top of the website and fill the window with the video player.",
   "author": "Chris H (Zren / Shade)",
   "homepage_url": "https://github.com/Rob1ts/Resize-Youtube-Player-to-Window-Size-Extension",

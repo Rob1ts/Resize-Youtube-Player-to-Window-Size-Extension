@@ -17,14 +17,25 @@
 'use strict';
 const crypto = require('crypto');
 const fs = require('fs');
+const os = require('os');
 const path = require('path');
 const { execFileSync } = require('child_process');
 
-const ROOT = 'D:\\Descargas\\Extensions\\Project reside Youtube player to window';
+// The repo root is wherever this script lives, so the packer works from any
+// checkout and no contributor's local absolute path is baked into the source.
+const ROOT = __dirname;
 const SRC = path.join(ROOT, 'Chromium');
 const OUT_CRX = path.join(ROOT, 'resize_yt_to_window_size.crx');
-const KEY_PEM = path.join(ROOT, 'crx-signing-key.pem');
 const KEYINFO = path.join(ROOT, 'crx-signing-key.info.txt');
+
+// The private signing key deliberately lives OUTSIDE the repository. Keeping it
+// in the working tree means a stray `git add -f`, a folder zip, or a cloud-sync
+// client can leak it, and anyone holding it can sign updates that impersonate
+// the extension. Override the location with the CRX_KEY_PATH environment
+// variable; the default is a per-user directory outside any checkout.
+const KEY_PEM = process.env.CRX_KEY_PATH
+  ? path.resolve(process.env.CRX_KEY_PATH)
+  : path.join(os.homedir(), '.crx-keys', 'resize-yt-to-window-size.pem');
 
 // ---------- minimal protobuf writer ---------------------------------------
 function varint(n) {
@@ -63,6 +74,7 @@ if (fs.existsSync(KEY_PEM)) {
   key = crypto.createPrivateKey(fs.readFileSync(KEY_PEM));
   console.log('signing key : reusing existing ' + KEY_PEM);
 } else {
+  fs.mkdirSync(path.dirname(KEY_PEM), { recursive: true, mode: 0o700 });
   const { privateKey } = crypto.generateKeyPairSync('rsa', { modulusLength: 2048 });
   key = privateKey;
   const pem = privateKey.export({ type: 'pkcs8', format: 'pem' });
@@ -119,7 +131,9 @@ const info = [
   '',
   'Extension ID: ' + extId,
   'Public key SHA-256 (crx_id): ' + crxId.toString('hex'),
-  'Private key: crx-signing-key.pem (git-ignored, never commit)',
+  'Private key: stored OUTSIDE the repository. Default:',
+  '  ~/.crx-keys/resize-yt-to-window-size.pem',
+  '  Override the location with the CRX_KEY_PATH environment variable.',
   '',
   'To rebuild after changing Chromium/:',
   '  node build-crx.js',
