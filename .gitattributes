@@ -1,0 +1,11 @@
+# Normalise text files to LF in the repository regardless of each
+# contributor's core.autocrlf. Without this, Windows checkouts rewrite every
+# text file to CRLF and the next diff is pure line-ending noise.
+* text=auto eol=lf
+
+# Assets and packages are binary - never translate line endings inside them.
+*.png binary
+*.ico binary
+*.xpi binary
+*.crx binary
+*.zip binary

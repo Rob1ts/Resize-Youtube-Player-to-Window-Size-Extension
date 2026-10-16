@@ -4,7 +4,7 @@
   "version": "139",
   "description": "Moves the YouTube video to the top of the website and fill the window with the video player.",
   "author": "Chris H (Zren / Shade)",
-  "homepage_url": "https://github.com/Zren/ResizeYoutubePlayerToWindowSize/",
+  "homepage_url": "https://github.com/Rob1ts/Resize-Youtube-Player-to-Window-Size-Extension",
 
   "icons": {
     "16": "icons/icon16.png",
@@ -24,22 +24,18 @@
     }
   },
 
-  "permissions": ["activeTab"],
-
   "host_permissions": [
     "https://*.youtube.com/*",
-    "http://*.youtube.com/*",
-    "https://*.youtu.be/*",
-    "http://*.youtu.be/*"
+    "https://*.youtu.be/*"
   ],
 
   "content_scripts": [
     {
       "matches": [
-        "*://*.youtube.com/*",
-        "*://youtube.com/*",
-        "*://*.youtu.be/*",
-        "*://youtu.be/*"
+        "https://*.youtube.com/*",
+        "https://youtube.com/*",
+        "https://*.youtu.be/*",
+        "https://youtu.be/*"
       ],
       "js": ["content.js"],
       "run_at": "document_idle",

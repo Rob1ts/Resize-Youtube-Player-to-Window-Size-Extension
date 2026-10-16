@@ -1,9 +1,16 @@
 // Resize YT To Window Size - Chromium extension content script
 //
 // Browser extension port of the userscript of the same name (v139).
-// The original userscript is kept unmodified below the "---" marker; the only
-// functional change is the chrome.runtime.onMessage handler at the bottom,
-// which also answers "state" requests coming from the toolbar popup.
+// Derived from upstream userscript code. Changes made during the extension
+// port:
+//   * chrome.runtime.onMessage handler at the bottom, answering "state" and
+//     "toggle" requests from the toolbar popup.
+//   * That handler checks sender.id against runtime.id, so only this
+//     extension's own pages can drive the player layout.
+//   * Removed the dead HistoryEvent helper that monkey-patched
+//     window.history.pushState/replaceState; it was never invoked.
+//   * Debug logging is opt-in (ytwp.debug = false) and DOM nodes / event
+//     objects are no longer written to the page console.
 //
 // Runs in the extension's isolated content-script world, on the top frame only,
 // at document_idle (the default run-at of the original userscript).
@@ -95,7 +102,7 @@
             newStyle = this.buildRule(selector, k);
         } else {
             // Invalid Arguments
-            console.log('Illegal arguments', arguments);
+            console.error('ytwp: illegal JSStyleSheet.appendRule arguments', arguments);
             return;
         }
 
@@ -116,53 +123,6 @@
     JSStyleSheet.prototype.injectIntoHeader = function() {
         JSStyleSheet.injectIntoHeader(this.id, this.stylesheet);
     };
-
-    //--- History
-    var HistoryEvent = function() {}
-    HistoryEvent.listeners = []
-
-    HistoryEvent.dispatch = function(state, title, url) {
-      var stack = this.listeners
-      for (var i = 0, l = stack.length; i < l; i++) {
-        stack[i].call(this, state, title, url)
-      }
-    }
-    HistoryEvent.onPushState = function(state, title, url) {
-        HistoryEvent.dispatch(state, title, url)
-        return HistoryEvent.origPushState.apply(window.history, arguments)
-    }
-    HistoryEvent.onReplaceState = function(state, title, url) {
-        HistoryEvent.dispatch(state, title, url)
-        return HistoryEvent.origReplaceState.apply(window.history, arguments)
-    }
-    HistoryEvent.inject = function() {
-        if (!HistoryEvent.injected) {
-            HistoryEvent.origPushState = window.history.pushState
-            HistoryEvent.origReplaceState = window.history.replaceState
-
-            window.history.pushState = HistoryEvent.onPushState
-            window.history.replaceState = HistoryEvent.onReplaceState
-            HistoryEvent.injected = true
-        }
-    }
-
-    HistoryEvent.timerId = 0
-    HistoryEvent.onTick = function() {
-        var currentPage = window.location.pathname + window.location.search
-        if (HistoryEvent.lastPage != currentPage) {
-            HistoryEvent.dispatch({}, document.title, window.location.href)
-            HistoryEvent.lastPage = currentPage
-        }
-    }
-    HistoryEvent.startTimer = function() {
-        HistoryEvent.lastPage = window.location.pathname + window.location.search
-        HistoryEvent.timerId = setInterval(HistoryEvent.onTick, 500)
-    }
-    HistoryEvent.stopTimer = function() {
-        clearInterval(HistoryEvent.timerId)
-    }
-    window.ytwpHistoryEvent = HistoryEvent
-
 
     //--- Constants
     var scriptShortName = 'ytwp'; // YT Window Player
@@ -185,8 +145,12 @@
     //--- YTWP
     var ytwp = uw.ytwp = {
         scriptShortName: scriptShortName, // YT Window Player
+        // Debug logging is opt-in so the published build stays quiet and never
+        // dumps DOM nodes or event objects into the page console. Errors are
+        // still reported.
+        debug: false,
         log_: function(logger, args) { logger.apply(console, ['[' + this.scriptShortName + '] '].concat(Array.prototype.slice.call(args))); return 1; },
-        log: function() { return this.log_(console.log, arguments); },
+        log: function() { if (!this.debug) return 0; return this.log_(console.log, arguments); },
         error: function() { return this.log_(console.error, arguments); },
 
         initialized: false,
@@ -787,7 +751,6 @@
         observe('#masthead-positioner-height-offset', {
             attributes: true,
         }, function(mutation) {
-            console.log(mutation.type, mutation)
             if (mutation.attributeName === 'style') {
                 var el = mutation.target;
                 if (el.style.height) { // != ""
@@ -838,10 +801,6 @@
 
     ytwp.registerMaterialListeners = function() {
         // For Material UI
-        // HistoryEvent.listeners.push(ytwp.materialPageTransition);
-        // HistoryEvent.startTimer();
-        // HistoryEvent.inject();
-        // HistoryEvent.listeners.push(console.log.bind(console));
         document.addEventListener('yt-page-data-fetched', ytwp.materialPageTransition)
         document.addEventListener('yt-navigate-finish', ytwp.materialPageTransition)
 
@@ -926,7 +885,6 @@
         if (validTarget && isKey) {
             e.preventDefault()
             e.stopPropagation()
-            console.log('cancelIfToggleKey.validKeyCallback', validKeyCallback, 'e', e)
             if (validKeyCallback) {
                 validKeyCallback()
             }
@@ -944,8 +902,12 @@
     // Chromium exposes `chrome` (which also returns promises from MV3).
     var ext = (typeof browser !== "undefined") ? browser : (typeof chrome !== "undefined" ? chrome : null);
     if (ext && ext.runtime && ext.runtime.onMessage) {
-        ext.runtime.onMessage.addListener(function(request) {
+        ext.runtime.onMessage.addListener(function(request, sender) {
             if (!request) return undefined;
+            // Only accept messages from this extension's own pages. Without
+            // this check, any future change that makes the extension externally
+            // reachable would let a web page drive the player layout.
+            if (!sender || !ext.runtime.id || sender.id !== ext.runtime.id) return undefined;
             if (request.id === "toggle") {
                 ytwp.toggleExtension();
                 return Promise.resolve({

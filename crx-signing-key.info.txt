@@ -1,0 +1,15 @@
+CRX3 signing key for "Resize YT To Window Size"
+
+Generated for local/sideloaded builds only.
+Chrome Web Store submissions upload resize_yt_to_window_size.zip -- Google
+signs those itself, and this key is NOT used for that.
+
+KEEP THIS FILE SAFE AND OUT OF VERSION CONTROL.
+Anyone holding it can ship updates that impersonate this extension.
+
+Extension ID: annhdppogbddnceadolfkbncomopjomj
+Public key SHA-256 (crx_id): 0dd73ffe6133d2403eb5a1d2ecef9ec9
+Private key: D:\Descargas\Extensions\Project reside Youtube player to window\crx-signing-key.pem
+
+To rebuild after changing Chromium/:
+  node build-crx.js

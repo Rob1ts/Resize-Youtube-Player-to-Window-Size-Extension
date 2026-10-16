@@ -1,0 +1,17 @@
+# CRX signing key -- NEVER commit.
+# Anyone holding this private key can ship updates that impersonate the
+# extension. It is only needed for locally sideloaded builds; Chrome Web Store
+# submissions use the .zip and are signed by Google.
+crx-signing-key.pem
+*.pem
+*.key
+*.p12
+
+# Stale backup of a previous package
+*.bak
+
+# OS cruft
+.DS_Store
+Thumbs.db
+desktop.ini
+$RECYCLE.BIN/
