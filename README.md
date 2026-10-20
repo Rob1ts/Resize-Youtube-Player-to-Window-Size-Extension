@@ -9,7 +9,7 @@
 [![Firefox Add-on](https://img.shields.io/amo/v/resize-yt-to-window-size?label=Firefox%20Add-on&logo=firefox-browser&logoColor=white&color=E6602C)](https://addons.mozilla.org/en-US/firefox/addon/resize-yt-to-window-size/)
 [![Chrome/Edge/Brave MV3](https://img.shields.io/badge/Chrome%20%7C%20Edge%20%7C%20Brave-Manifest%20V3-4285F4?logo=googlechrome&logoColor=white)](https://developer.chrome.com/docs/extensions/)
 [![License GPL-3.0-or-later](https://img.shields.io/badge/license-GPL--3.0--or--later-blue.svg)](LICENSE)
-[![Version 141.0.0](https://img.shields.io/badge/version-141.0.0-informational)](https://github.com/Rob1ts/Resize-Youtube-Player-to-Window-Size-Extension/releases/latest)
+[![Version 141.0.1](https://img.shields.io/badge/version-141.0.1-informational)](https://github.com/Rob1ts/Resize-Youtube-Player-to-Window-Size-Extension/releases/latest)
 
 [**Install for Firefox →**](https://addons.mozilla.org/en-US/firefox/addon/resize-yt-to-window-size/)
 
@@ -72,7 +72,7 @@ signed by Mozilla, installs in one click, and updates automatically:
 [**Install on Mozilla Add-ons →**](https://addons.mozilla.org/en-US/firefox/addon/resize-yt-to-window-size/)
 
 The existing AMO listing is **Resize YT To Window Size** and keeps the add-on ID
-(`resize-yt-to-window-size@local`). It is approved at version `141.0.0` and now
+(`resize-yt-to-window-size@local`). It is approved and published on AMO and now
 ships the YouTube Window Player build.
 
 For development, load the build temporarily:

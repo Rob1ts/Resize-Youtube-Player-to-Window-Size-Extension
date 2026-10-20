@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "YouTube Window Player",
   "short_name": "YT Window",
-  "version": "141.0.0",
+  "version": "141.0.1",
   "description": "Makes the YouTube player fill your entire browser window. Toggle it from the toolbar and see live status.",
   "minimum_chrome_version": "102",
   "permissions": [

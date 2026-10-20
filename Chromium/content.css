@@ -117,6 +117,18 @@ html.ytw-active:not([fullscreen]) #masthead-container.ytd-app {
   z-index: 2020 !important;
 }
 
+/* YouTube parks its "Skip navigation" button 1000px above the masthead.
+   Moving the masthead to 100vh can put that offset inside the viewport on
+   tall screens, leaving the button permanently visible over the video. Keep
+   it hidden above the viewport, but put it back at the top when focused. */
+html.ytw-active:not([fullscreen]) #skip-navigation {
+  top: calc(-100vh - 1000px) !important;
+}
+
+html.ytw-active:not([fullscreen]) #skip-navigation:focus-within {
+  top: calc(-100vh + 12px) !important;
+}
+
 /* Leave room for the masthead before the regular page content starts. */
 html.ytw-active:not([fullscreen]) #page-manager.ytd-app {
   padding-top: var(--ytd-masthead-height, 56px) !important;

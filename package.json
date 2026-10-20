@@ -1,6 +1,6 @@
 {
   "name": "youtube-window-player",
-  "version": "141.0.0",
+  "version": "141.0.1",
   "private": true,
   "description": "Firefox and Chromium extension that makes the YouTube player fill the browser window.",
   "license": "GPL-3.0-or-later",
