@@ -6,10 +6,12 @@
 
 **Make the YouTube player fill your entire browser window — width and height — with the masthead and page content scrolling below it.**
 
-[![Firefox 140+](https://img.shields.io/badge/Firefox-140%2B-E6602C?logo=firefox-browser&logoColor=white)](https://www.mozilla.org/firefox/)
+[![Firefox Add-on](https://img.shields.io/amo/v/resize-yt-to-window-size?label=Firefox%20Add-on&logo=firefox-browser&logoColor=white&color=E6602C)](https://addons.mozilla.org/en-US/firefox/addon/resize-yt-to-window-size/)
 [![Chrome/Edge/Brave MV3](https://img.shields.io/badge/Chrome%20%7C%20Edge%20%7C%20Brave-Manifest%20V3-4285F4?logo=googlechrome&logoColor=white)](https://developer.chrome.com/docs/extensions/)
 [![License GPL-3.0-or-later](https://img.shields.io/badge/license-GPL--3.0--or--later-blue.svg)](LICENSE)
 [![Version 141.0.0](https://img.shields.io/badge/version-141.0.0-informational)](https://github.com/Rob1ts/Resize-Youtube-Player-to-Window-Size-Extension/releases/latest)
+
+[**Install for Firefox →**](https://addons.mozilla.org/en-US/firefox/addon/resize-yt-to-window-size/)
 
 [Install](#installation) · [What it does](#what-it-does) · [The popup](#the-popup) · [How it works](#how-it-works) · [Build](#development)
 
@@ -62,6 +64,29 @@ current tab (`ON`, empty, `!`, or `OFF`).
 
 ## Installation
 
+### Firefox
+
+**Recommended: install from Mozilla Add-ons.** The extension is reviewed and
+signed by Mozilla, installs in one click, and updates automatically:
+
+[**Install on Mozilla Add-ons →**](https://addons.mozilla.org/en-US/firefox/addon/resize-yt-to-window-size/)
+
+The existing AMO listing is **Resize YT To Window Size** and keeps the add-on ID
+(`resize-yt-to-window-size@local`). It is approved at version `141.0.0` and now
+ships the YouTube Window Player build.
+
+For development, load the build temporarily:
+
+1. Open `about:debugging#/runtime/this-firefox`.
+2. Click **Load Temporary Add-on…**.
+3. Select `Firefox/manifest.json` (or the XPI from the latest GitHub release).
+
+The extension stays installed until Firefox restarts. The XPI attached to GitHub
+releases is unsigned and intended for temporary testing or AMO submission;
+install from AMO for the signed, auto-updating build. To publish an update,
+upload the release XPI (or a ZIP of `Firefox/`) to the
+[AMO developer hub](https://addons.mozilla.org/developers/).
+
 ### Chromium browsers (Chrome, Edge, Brave, Opera, Vivaldi, Chromium)
 
 **Recommended: load the unpacked build**
@@ -76,32 +101,6 @@ Modern Chrome, Edge, and most Chromium browsers block extensions that were not
 installed from their store, so the CRX may be rejected. Loading `Chromium/` as
 an unpacked extension is the method that works without enterprise policy or a
 store listing.
-
-### Firefox
-
-The XPI is **unsigned**. Firefox release builds require store signing for a
-permanent install, so use the temporary-install flow. The manifest keeps the
-existing AMO add-on ID (`resize-yt-to-window-size@local`) and uses version
-`141.0.0`, so uploading this package updates the existing **Resize YT To Window
-Size** listing instead of creating a new add-on.
-
-1. Open `about:debugging#/runtime/this-firefox`.
-2. Click **Load Temporary Add-on…**.
-3. Select `Firefox/manifest.json` (or the `.xpi` from the latest release).
-
-The extension stays installed until Firefox restarts. To make it permanent,
-sign the package as an unlisted add-on with an AMO API key:
-
-```bash
-npx web-ext sign \
-  --source-dir Firefox \
-  --channel=unlisted \
-  --api-key=YOUR_AMO_KEY \
-  --api-secret=YOUR_AMO_SECRET
-```
-
-or submit a ZIP of `Firefox/` on <https://addons.mozilla.org/developers/> (or the
-XPI itself). Once signed, the resulting XPI installs normally in Firefox release.
 
 ## Usage
 
@@ -238,8 +237,9 @@ Automated checks for this build:
   resized.
 - YouTube changes its DOM regularly. If the player stops filling the window,
   the popup reports **Not applied**; a selector update may be needed.
-- The included Firefox XPI is unsigned; permanent installation requires AMO
-  signing as described above.
+- The XPI attached to GitHub releases is unsigned; use the
+  [AMO listing](https://addons.mozilla.org/en-US/firefox/addon/resize-yt-to-window-size/)
+  for the signed, auto-updating install.
 - Modern Chrome/Edge may refuse a locally built CRX. Use the unpacked build or a
   store/policy installation.
 
@@ -269,7 +269,7 @@ original author.
 
 - **Repository** — <https://github.com/Rob1ts/Resize-Youtube-Player-to-Window-Size-Extension>
 - **Releases** — <https://github.com/Rob1ts/Resize-Youtube-Player-to-Window-Size-Extension/releases>
+- **Firefox Add-on (AMO)** — <https://addons.mozilla.org/en-US/firefox/addon/resize-yt-to-window-size/>
 - **Original project** — <https://github.com/Zren/ResizeYoutubePlayerToWindowSize/>
 - **Original userscript** — <https://greasyfork.org/scripts/811-resize-yt-to-window-size>
 - Chrome Web Store listing — *pending*
-- AMO listing — *pending*
