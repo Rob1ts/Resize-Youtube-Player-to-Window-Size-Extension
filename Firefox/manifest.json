@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "YouTube Window Player",
   "short_name": "YT Window",
-  "version": "1.0.0",
+  "version": "141.0.0",
   "description": "Makes the YouTube player fill your entire browser window. Toggle it from the toolbar and see live status.",
   "permissions": [
     "storage"
@@ -61,13 +61,16 @@
   },
   "browser_specific_settings": {
     "gecko": {
-      "id": "youtube-window-player@local.extension",
+      "id": "resize-yt-to-window-size@local",
       "strict_min_version": "140.0",
       "data_collection_permissions": {
         "required": [
           "none"
         ]
       }
+    },
+    "gecko_android": {
+      "strict_min_version": "142.0"
     }
   }
 }

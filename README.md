@@ -9,7 +9,7 @@
 [![Firefox 140+](https://img.shields.io/badge/Firefox-140%2B-E6602C?logo=firefox-browser&logoColor=white)](https://www.mozilla.org/firefox/)
 [![Chrome/Edge/Brave MV3](https://img.shields.io/badge/Chrome%20%7C%20Edge%20%7C%20Brave-Manifest%20V3-4285F4?logo=googlechrome&logoColor=white)](https://developer.chrome.com/docs/extensions/)
 [![License GPL-3.0-or-later](https://img.shields.io/badge/license-GPL--3.0--or--later-blue.svg)](LICENSE)
-[![Version 1.0.0](https://img.shields.io/badge/version-1.0.0-informational)](https://github.com/Rob1ts/Resize-Youtube-Player-to-Window-Size-Extension/releases)
+[![Version 141.0.0](https://img.shields.io/badge/version-141.0.0-informational)](https://github.com/Rob1ts/Resize-Youtube-Player-to-Window-Size-Extension/releases/latest)
 
 [Install](#installation) · [What it does](#what-it-does) · [The popup](#the-popup) · [How it works](#how-it-works) · [Build](#development)
 
@@ -80,7 +80,10 @@ store listing.
 ### Firefox
 
 The XPI is **unsigned**. Firefox release builds require store signing for a
-permanent install, so use the temporary-install flow:
+permanent install, so use the temporary-install flow. The manifest keeps the
+existing AMO add-on ID (`resize-yt-to-window-size@local`) and uses version
+`141.0.0`, so uploading this package updates the existing **Resize YT To Window
+Size** listing instead of creating a new add-on.
 
 1. Open `about:debugging#/runtime/this-firefox`.
 2. Click **Load Temporary Add-on…**.
