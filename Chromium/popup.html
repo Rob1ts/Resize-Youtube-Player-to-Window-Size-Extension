@@ -1,29 +1,53 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Resize YT To Window Size</title>
-  <link rel="stylesheet" href="popup.css">
-</head>
-<body>
-  <header class="head">
-    <img class="logo" src="icons/icon48.png" alt="" width="30" height="30">
-    <div class="titles">
-      <h1>Resize YT To Window Size</h1>
-      <p class="sub" id="context">Checking current tab&hellip;</p>
-    </div>
-  </header>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="dark light">
+    <title>YouTube Window Player</title>
+    <link rel="stylesheet" href="popup.css">
+  </head>
+  <body>
+    <main class="panel">
+      <div class="accent" aria-hidden="true"></div>
 
-  <button type="button" id="toggle" class="toggle" role="switch" aria-checked="false" disabled>
-    <span class="track"><span class="thumb"></span></span>
-    <span class="label" id="toggleLabel">Window player</span>
-  </button>
+      <header class="header">
+        <img class="logo" src="icons/icon48.png" width="44" height="44" alt="">
+        <div class="heading">
+          <h1>YouTube Window Player</h1>
+          <p>Fill the window with the video.</p>
+        </div>
+      </header>
 
-  <footer class="foot">
-    Press <kbd>W</kbd> while the video has focus to toggle it too.
-  </footer>
+      <section class="control" aria-labelledby="toggle-label">
+        <div class="control-copy">
+          <span id="toggle-label" class="control-title">Full-window player</span>
+          <span id="toggle-description" class="control-description">Applies to every YouTube tab.</span>
+        </div>
+        <label class="switch">
+          <input id="enabled" type="checkbox" role="switch" aria-labelledby="toggle-label" aria-describedby="toggle-description">
+          <span class="track" aria-hidden="true">
+            <span class="thumb"></span>
+          </span>
+        </label>
+      </section>
 
-  <script src="popup.js"></script>
-</body>
+      <section id="status" class="status" aria-live="polite" aria-atomic="true">
+        <span id="status-dot" class="dot" data-status="pending" aria-hidden="true"></span>
+        <div class="status-copy">
+          <span id="status-text" class="status-text">Checking...</span>
+          <span id="status-detail" class="status-detail">Looking for a YouTube tab.</span>
+        </div>
+      </section>
+
+      <button id="reload" class="reload" type="button" hidden>Reload this tab</button>
+
+      <footer class="footer">
+        <span class="shortcut">Toggle: <kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>W</kbd></span>
+        <span id="version" class="version"></span>
+      </footer>
+    </main>
+
+    <script src="popup.js"></script>
+  </body>
 </html>

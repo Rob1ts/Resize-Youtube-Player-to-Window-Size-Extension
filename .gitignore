@@ -1,24 +1,25 @@
-# CRX signing key -- NEVER commit.
-# Anyone holding this private key can ship updates that impersonate the
-# extension. It is only needed for locally sideloaded builds; Chrome Web Store
-# submissions use the .zip and are signed by Google.
-crx-signing-key.pem
+# Dependencies
+node_modules/
+
+# CRX signing key -- NEVER commit. Anyone holding this private key can publish
+# updates that impersonate the extension. Keep a backup outside the repository.
+keys/
 *.pem
 *.key
 *.p12
 
-# Built packages -- regenerate with build-crx.js (Chromium) or the documented
-# Firefox zip command. Not committed so they can never silently drift from the
-# source they were built from.
-/resize_yt_to_window_size.crx
-/resize_yt_to_window_size.zip
-/resize_yt_to_window_size.xpi
+# Built packages -- published as GitHub release assets, not committed source.
+# Regenerate with: npm run build && npm run crx
+release/
+*.crx
+*.xpi
+*.zip
 
-# Transient scratch files written by the build/verify scripts
-.crx-payload.zip
+# Transient build/verification files
 .verify-payload/
+.crx-payload.zip
 
-# Stale backup of a previous package
+# Stale package backups
 *.bak
 
 # OS cruft

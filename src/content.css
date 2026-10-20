@@ -1,0 +1,124 @@
+/*
+ * YouTube Window Player - page styles
+ * Based on "Resize YT To Window Size" by Chris H (Zren / Shade), MIT licensed.
+ *
+ * Every rule is gated behind html.ytw-active, plus :not([fullscreen]) so
+ * YouTube's native fullscreen mode is left completely untouched.
+ */
+
+html.ytw-active:not([fullscreen]) {
+  background: #000 !important;
+  overflow-anchor: none !important;
+}
+
+/* Keep the absolutely positioned player out of the normal page flow. */
+html.ytw-active:not([fullscreen]) body {
+  margin-top: 100vh !important;
+  overflow-anchor: none !important;
+}
+
+html.ytw-active:not([fullscreen]) ytd-app,
+html.ytw-active:not([fullscreen]) #content.ytd-app,
+html.ytw-active:not([fullscreen]) ytd-page-manager#page-manager,
+html.ytw-active:not([fullscreen]) ytd-watch-flexy,
+html.ytw-active:not([fullscreen]) ytd-watch-grid,
+html.ytw-active:not([fullscreen]) #full-bleed-container,
+html.ytw-active:not([fullscreen]) #player-full-bleed-container,
+html.ytw-active:not([fullscreen]) #player-theater-container {
+  position: static !important;
+}
+
+html.ytw-active:not([fullscreen]) #full-bleed-container,
+html.ytw-active:not([fullscreen]) #player-theater-container {
+  height: 0 !important;
+  min-height: 0 !important;
+  max-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: visible !important;
+}
+
+/* Both current YouTube layouts wrap the player in positioned elements. All of
+   them must be static so #player-container is positioned against the viewport. */
+html.ytw-active:not([fullscreen]) #player,
+html.ytw-active:not([fullscreen]) #player-container-outer,
+html.ytw-active:not([fullscreen]) #player-container-inner {
+  position: static !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  max-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: visible !important;
+}
+
+
+/* The player box itself is pinned to the viewport. left/right plus width:auto
+   uses the layout viewport width and avoids overlapping the scrollbar. */
+html.ytw-active:not([fullscreen]) #player-container {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: auto !important;
+  width: auto !important;
+  height: 100vh !important;
+  min-height: 100vh !important;
+  max-height: 100vh !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  background: #000 !important;
+  z-index: 0 !important;
+}
+
+html.ytw-active:not([fullscreen]) #player-container > ytd-player#ytd-player,
+html.ytw-active:not([fullscreen]) #player-container #container.ytd-player,
+html.ytw-active:not([fullscreen]) #player-container #movie_player,
+html.ytw-active:not([fullscreen]) #player-container .html5-video-container,
+html.ytw-active:not([fullscreen]) #player-container video.html5-main-video {
+  width: 100% !important;
+  min-width: 100% !important;
+  max-width: 100% !important;
+  height: 100% !important;
+  min-height: 100% !important;
+  max-height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+}
+
+html.ytw-active:not([fullscreen]) #player-container video.html5-main-video {
+  top: 0 !important;
+  left: 0 !important;
+  object-fit: contain !important;
+}
+
+html.ytw-active:not([fullscreen]) #player-container #movie_player {
+  background-color: #000 !important;
+}
+
+/* Keep thumbnails and cover-fitted videos properly letterboxed. */
+html.ytw-active:not([fullscreen]) #player-container .ytp-cued-thumbnail-overlay-image {
+  background-size: contain !important;
+  background-position: center !important;
+}
+
+html.ytw-active:not([fullscreen]) #player-container .ytp-fit-cover-video .html5-main-video {
+  object-fit: contain !important;
+}
+
+/* Put the masthead directly below the video instead of over the top of it. */
+html.ytw-active:not([fullscreen]) #masthead-container.ytd-app {
+  position: absolute !important;
+  top: 100vh !important;
+  right: 0 !important;
+  left: 0 !important;
+  z-index: 2020 !important;
+}
+
+/* Leave room for the masthead before the regular page content starts. */
+html.ytw-active:not([fullscreen]) #page-manager.ytd-app {
+  padding-top: var(--ytd-masthead-height, 56px) !important;
+}
+

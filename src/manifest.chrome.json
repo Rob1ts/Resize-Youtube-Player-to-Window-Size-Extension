@@ -1,0 +1,49 @@
+{
+  "manifest_version": 3,
+  "name": "YouTube Window Player",
+  "short_name": "YT Window",
+  "version": "1.0.0",
+  "description": "Makes the YouTube player fill your entire browser window. Toggle it from the toolbar and see live status.",
+  "minimum_chrome_version": "102",
+  "permissions": ["storage"],
+  "host_permissions": ["https://youtube.com/*", "https://*.youtube.com/*"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "YouTube Window Player",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "commands": {
+    "toggle-player": {
+      "suggested_key": {
+        "default": "Alt+Shift+W"
+      },
+      "description": "Toggle the full-window YouTube player"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://youtube.com/*", "https://*.youtube.com/*"],
+      "css": ["content.css"],
+      "js": ["content.js"],
+      "run_at": "document_start",
+      "all_frames": false
+    }
+  ],
+  "content_security_policy": {
+    "extension_pages": "default-src 'self'; script-src 'self'; object-src 'none'; base-uri 'none'; connect-src 'none'; img-src 'self'; style-src 'self'"
+  }
+}

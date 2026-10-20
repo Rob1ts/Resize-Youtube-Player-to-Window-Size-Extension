@@ -1,0 +1,23 @@
+{
+  "name": "youtube-window-player",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Firefox and Chromium extension that makes the YouTube player fill the browser window.",
+  "license": "GPL-3.0-or-later",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rob1ts/Resize-Youtube-Player-to-Window-Size-Extension.git"
+  },
+  "homepage": "https://github.com/Rob1ts/Resize-Youtube-Player-to-Window-Size-Extension#readme",
+  "bugs": {
+    "url": "https://github.com/Rob1ts/Resize-Youtube-Player-to-Window-Size-Extension/issues"
+  },
+  "scripts": {
+    "build": "node tools/build.mjs",
+    "crx": "node tools/pack-crx.mjs",
+    "icons": "powershell -NoProfile -ExecutionPolicy Bypass -File tools/make-icons.ps1"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
