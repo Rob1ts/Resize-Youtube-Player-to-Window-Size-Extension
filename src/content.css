@@ -17,6 +17,17 @@ html.ytw-active:not([fullscreen]) body {
   overflow-anchor: none !important;
 }
 
+/* Never allow the page to scroll sideways. YouTube's global arrow-key
+   shortcuts seek the video but do not always prevent the browser's default
+   arrow-key scrolling. If any page element extends past the right edge, every
+   Right Arrow press also drags the whole page sideways. Clip the horizontal
+   axis while keeping normal vertical scrolling. */
+html.ytw-active:not([fullscreen]),
+html.ytw-active:not([fullscreen]) body {
+  overflow-x: hidden !important;
+  overflow-x: clip !important;
+}
+
 html.ytw-active:not([fullscreen]) ytd-app,
 html.ytw-active:not([fullscreen]) #content.ytd-app,
 html.ytw-active:not([fullscreen]) ytd-page-manager#page-manager,

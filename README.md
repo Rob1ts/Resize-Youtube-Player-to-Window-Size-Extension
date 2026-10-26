@@ -9,7 +9,7 @@
 [![Firefox Add-on](https://img.shields.io/amo/v/resize-yt-to-window-size?label=Firefox%20Add-on&logo=firefox-browser&logoColor=white&color=E6602C)](https://addons.mozilla.org/en-US/firefox/addon/resize-yt-to-window-size/)
 [![Chrome/Edge/Brave MV3](https://img.shields.io/badge/Chrome%20%7C%20Edge%20%7C%20Brave-Manifest%20V3-4285F4?logo=googlechrome&logoColor=white)](https://developer.chrome.com/docs/extensions/)
 [![License GPL-3.0-or-later](https://img.shields.io/badge/license-GPL--3.0--or--later-blue.svg)](LICENSE)
-[![Version 141.0.1](https://img.shields.io/badge/version-141.0.1-informational)](https://github.com/Rob1ts/Resize-Youtube-Player-to-Window-Size-Extension/releases/latest)
+[![Version 141.0.2](https://img.shields.io/badge/version-141.0.2-informational)](https://github.com/Rob1ts/Resize-Youtube-Player-to-Window-Size-Extension/releases/latest)
 
 [**Install for Firefox →**](https://addons.mozilla.org/en-US/firefox/addon/resize-yt-to-window-size/)
 
@@ -95,12 +95,12 @@ upload the release XPI (or a ZIP of `Firefox/`) to the
 2. Turn on **Developer mode**.
 3. Click **Load unpacked** and select the `Chromium/` folder in this repository.
 
-Alternatively, download `youtube-window-player-chromium.crx` from the
-[latest release](https://github.com/Rob1ts/Resize-Youtube-Player-to-Window-Size-Extension/releases).
-Modern Chrome, Edge, and most Chromium browsers block extensions that were not
-installed from their store, so the CRX may be rejected. Loading `Chromium/` as
-an unpacked extension is the method that works without enterprise policy or a
-store listing.
+You can also download `youtube-window-player-chromium.zip` from the
+[latest release](https://github.com/Rob1ts/Resize-Youtube-Player-to-Window-Size-Extension/releases),
+extract it, and select the extracted folder in step 3. Modern Chrome, Edge, and
+most Chromium browsers block extensions that were not installed from their
+store, so loading the unpacked build is the method that works without
+enterprise policy or a store listing.
 
 ## Usage
 
